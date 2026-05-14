@@ -1,0 +1,35 @@
+workflows:
+  aina-android-release:
+    name: Aina Android APK Build
+    max_build_duration: 120
+    environment:
+      flutter: stable
+    scripts:
+      - name: Create assets/models directory
+        script: |
+          mkdir -p assets/models
+          
+      - name: Download Llama-3.2-1B GGUF Model from Google Drive
+        script: |
+          FILE_ID="1G2MWbOXdDgPRbU-fn2DbARNFTNFp97m9"
+          DEST="assets/models/llama-3.2-1b-instruct-q4_k_m.gguf"
+          echo "Téléchargement du modèle $FILE_ID vers $DEST..."
+          
+          # Méthode wget pour contourner l'avertissement de scan antivirus Google Drive pour les gros fichiers
+          wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id='${FILE_ID} -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id="${FILE_ID} -O ${DEST}
+          rm -f /tmp/cookies.txt
+          
+          echo "Téléchargement terminé."
+          ls -lh assets/models/
+          
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+          
+      - name: Build Release APK
+        script: |
+          flutter build apk --release
+          
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/flutter-apk/app-release.apk.sha1

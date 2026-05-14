@@ -1,0 +1,87 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter/foundation.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+import '../../data/models/medication_reminder_model.dart';
+import 'dart:io';
+
+class NotificationService {
+  static final NotificationService _instance = NotificationService._internal();
+  factory NotificationService() => _instance;
+  NotificationService._internal();
+
+  final FlutterLocalNotificationsPlugin _notificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  Future<void> init() async {
+    if (kIsWeb) return; // Notifications not supported in simple web mock
+
+    tz.initializeTimeZones();
+
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+
+    const InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+
+    await _notificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) {
+        // Handle notification tap
+      },
+    );
+
+    if (Platform.isAndroid) {
+      final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
+          _notificationsPlugin.resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>();
+      androidImplementation?.requestNotificationsPermission();
+      androidImplementation?.requestExactAlarmsPermission();
+    }
+  }
+
+  Future<void> scheduleMedicationReminder(MedicationReminderModel reminder) async {
+    if (kIsWeb) return;
+    if (reminder.id == null) return;
+
+    final id = reminder.id!;
+
+    // Check if time is in the past, if so schedule for next day
+    DateTime scheduledDate = reminder.time;
+    if (scheduledDate.isBefore(DateTime.now())) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+
+    await _notificationsPlugin.zonedSchedule(
+      id,
+      'Rappel Médicament',
+      'Il est l\\'heure de prendre : ${reminder.medName} (${reminder.dosage})',
+      tz.TZDateTime.from(scheduledDate, tz.local),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'medication_reminders',
+          'Rappels de médicaments',
+          channelDescription: 'Notifications pour les prises de médicaments',
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time, // Repeat daily at the same time
+    );
+  }
+
+  Future<void> cancelReminder(int id) async {
+    if (kIsWeb) return;
+    await _notificationsPlugin.cancel(id);
+  }
+}

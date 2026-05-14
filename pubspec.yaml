@@ -1,0 +1,69 @@
+name: aina
+description: Application Android de santé infantile et de secourisme local-first pour Madagascar.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  
+  # Internationalisation
+  intl: ^0.19.0
+  easy_localization: ^3.0.7
+  
+  # IA et Text-to-Speech
+  llamadart: ^1.1.2  # Alternative : llama_cpp_dart
+  flutter_tts: ^3.8.3
+  google_mlkit_text_recognition: ^0.12.0
+  speech_to_text: ^6.6.1
+  image_picker: ^1.1.2
+  
+  # Notifications
+  flutter_local_notifications: ^17.2.2
+  timezone: ^0.9.3
+
+  # Export PDF & Partage
+  pdf: ^3.11.1
+  printing: ^5.13.2
+  share_plus: ^9.0.0
+  
+  # Base de données & Stockage (Local-first et RGPD)
+  sqflite: ^2.3.0
+  flutter_secure_storage: ^9.0.0
+  path_provider: ^2.1.2
+  
+  # Utilitaires & Sécurité
+  local_auth: ^2.1.8
+  device_info_plus: ^10.0.0
+  url_launcher: ^6.2.2
+  cryptography: ^2.7.0
+  
+  # Interface
+  fl_chart: ^0.66.0
+  
+  # Multimédia
+  just_audio: ^0.9.36
+  
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/data/
+    - assets/models/
+    - assets/audio/
+    - assets/l10n/
+    - assets/images/
+    - assets/images/secours/

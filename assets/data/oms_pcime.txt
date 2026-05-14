@@ -1,0 +1,177 @@
+================================================================================
+AINA APP - BASE DE DONNÉES CLINIQUE OFFICIELLE - PCIME / OMS HORS-LIGNE (0-5 ANS)
+================================================================================
+
+--------------------------------------------------------------------------------
+MODULE 1 : LES SIGNES GÉNÉRAUX DE DANGER (FAMINDRAMIN'NY REY)
+--------------------------------------------------------------------------------
+CRITÈRE D'ÉVALUATION OBLIGATOIRE POUR TOUT ENFANT S'PRÉSENTANT AU TRIAGE.
+Mots-clés de recherche : danger, urgence, ho faty, tsy tana, convulsions, mandoa, matory, tsy mahasotro, tazo be.
+
+Symptômes et Signes :
+1. L'enfant est incapable de boire ou de téter (tsy afaka misotro na minono).
+2. L'enfant vomit tout ce qu'il avale (mandoa daholo izay rehetra haniny na sotroiny).
+3. L'enfant a eu des convulsions au cours de cette maladie (nifanintona nandritra ity aretina ity).
+4. L'enfant est léthargique ou inconscient / dort tout le temps (matoritory lava na tsy mahatsiaro tena).
+
+CLASSIFICATION : MALADIE TRÈS GRAVE (ARETINA MAFY LOATRA)
+Action médicale immédiate :
+- Ordonner l'évacuation immédiate vers l'hôpital ou le CSB le plus proche.
+- Administrer une première dose d'antibiotique approprié (Amoxicilline ou Ampicilline intra-musculaire) si disponible avant le départ.
+- Traiter les convulsions immédiatement si actives (Diazépam rectal : 0,5 mg/kg).
+- Prévenir l'hypoglycémie : Donner de l'eau sucrée (4 cuillères à café de sucre dans 200 ml d'eau) par sonde ou cuillère si l'enfant peut avaler.
+- Envelopper l'enfant pour éviter l'hypothermie pendant le transport.
+
+--------------------------------------------------------------------------------
+MODULE 2 : TOUX ET DIFFICULTÉS RESPIRATOIRES (KOHAKA SY MANAVY)
+--------------------------------------------------------------------------------
+Mots-clés de recherche : toux, kohaka, sempotra, manavy, tsempotra, tirage, respiration rapide, sempo-dratsy, poumon, pneumonie, tratra.
+
+Évaluation :
+- Compter les respirations sur une minute entière (60 secondes) quand l'enfant est au calme.
+- Rechercher un tirage sous-costal (mihady tratra / ny hoditra eo ambany taolan-tehezana milentika rehefa miaina).
+- Écouter si un stridor est présent (feon-pisefoana siotsioka re rehefa miaina miditra).
+
+Seuils de Respiration Rapide (Fiainana haingana loatra) :
+- Enfant âgé de moins de 2 mois : 60 respirations par minute ou plus.
+- Enfant âgé de 2 à 11 mois : 50 respirations par minute ou plus.
+- Enfant âgé de 12 mois à 5 ans : 40 respirations par minute ou plus.
+
+CLASSIFICATION 2.1 : PNEUMONIE GRAVE OU MALADIE TRÈS GRAVE (PNEUMONIE MAFY)
+Signes : Tout signe général de danger OU Tirage sous-costal OU Stridor au repos.
+Action :
+- Transférer d'urgence à l'hôpital.
+- Donner une première dose d'un antibiotique recommandé (Benzylpénicilline ou Ampicilline).
+- Donner de l'oxygène si disponible.
+
+CLASSIFICATION 2.2 : PNEUMONIE (PNEUMONIE TSOTRA)
+Signes : Respiration rapide ET aucun signe de gravité.
+Action :
+- Traiter à la maison avec un antibiotique oral : Amoxicilline par voie orale (25 mg/kg deux fois par jour pendant 3 à 5 jours).
+- Apaiser la toux avec un remède sûr (eau tiède citronnée, miel si l'enfant a plus de 1 an).
+- Conseiller la mère sur les signes d'alerte pour revenir immédiatement.
+- Revoir l'enfant pour un contrôle après 2 jours (48 heures).
+
+CLASSIFICATION 2.3 : PAS DE PNEUMONIE : RHUME OU TOUX SIMPLE (SENTO NA SOKOKA)
+Signes : Pas de respiration rapide, pas de tirage sous-costal, pas de stridor.
+Action :
+- Pas d'antibiotiques.
+- Apaiser la toux et adoucir la gorge.
+- Donner des conseils de surveillance à la mère.
+
+--------------------------------------------------------------------------------
+MODULE 3 : DIARRHÉE ET DÉSHYDRATATION (MANAVY SY HO RITRA RANO)
+--------------------------------------------------------------------------------
+Mots-clés de recherche : diarrhée, manavy, rano, fivalanana, mandoa, ritra rano, déshydratation, maso lavaka, malemy, soif, SRO, zinc.
+
+Évaluation des Signes de Déshydratation :
+1. État général : Léthargique ou inconscient (malemy loatra) ? Ou agité et irritable (saro-sorona) ?
+2. Yeux : Enfoncés ou cernés (maso lavaka) ?
+3. En offrant à boire : L'enfant ne peut pas boire ou boit mal ? Ou boit avidement, a très soif (mangetaheta fatratra) ?
+4. Le pli cutané (pincement de la peau du ventre) : S'efface-t-il très lentement (plus de 2 secondes) ? Ou lentement ?
+
+CLASSIFICATION 3.1 : DÉSHYDRATATION SÉVÈRE (RITRA RANO MAFY LOATRA)
+Signes : Au moins deux des signes suivants : Léthargique ou inconscient, Yeux enfoncés, Ne peut pas boire ou boit mal, Pli cutané s'efface très lentement (>2 secondes).
+Action (Plan C de l'OMS) :
+- Évacuation d'urgence pour réhydratation intraveineuse (Sérum Ringer Lactate ou Physiologique, 100 ml/kg).
+- Si l'enfant peut avaler, donner de la Solution de Réhydratation Orale (SRO / Rano SRO) par petites gorgées en attendant ou pendant le transport.
+
+CLASSIFICATION 3.2 : DÉSHYDRATATION MODÉRÉE (RITRA RANO MANDREHANA)
+Signes : Au moins deux des signes suivants : Agité ou irritable, Yeux enfoncés, Boit avidement avec soif, Pli cutané s'efface lentement.
+Action (Plan B de l'OMS) :
+- Donner de la solution de SRO à la maison ou au centre sur une période de 4 heures.
+- Quantité approximative de SRO : Poids de l'enfant (en kg) x 75 ml.
+- Montrer à la mère comment donner le SRO à la cuillère, une cuillerée toutes les 1 à 2 minutes.
+- Réévaluer l'enfant après 4 heures et choisir le plan approprié (A, B ou C).
+- Commencer le traitement par le Zinc (Sénka) dès que l'enfant peut manger.
+
+CLASSIFICATION 3.3 : PAS DE DÉSHYDRATATION (TSY RITRA RANO)
+Signes : Pas assez de signes pour classer dans les catégories ci-dessus.
+Action (Plan A de l'OMS) :
+- Donner plus de liquides que d'habitude (SRO, soupe, eau de riz, lait maternel continu).
+- Donner du Zinc (Sénka) : 10 mg par jour par voie orale pour les moins de 6 mois, 20 mg par jour pour les plus de 6 mois, pendant 10 à 14 jours de manière continue.
+- Expliquer les règles d'hygiène alimentaire et de lavage des mains.
+
+CLASSIFICATION 3.4 : DIARRHÉE PERSISTANTE (FIVALANANA MAHARITRA)
+Signes : Diarrhée qui dure depuis 14 jours ou plus (fivalanana mihoatra ny 14 andro).
+Action :
+- Si déshydratation présente : Traiter la déshydratation avant d'évacuer à l'hôpital.
+- Si pas de déshydratation : Conseiller un régime alimentaire spécial adapté à l'âge et transférer pour investigations complémentaires.
+
+CLASSIFICATION 3.5 : DYSENTERIE (FIVALANANA MISY RANA)
+Signes : Sang visible dans les selles (mivalana misy ra).
+Action :
+- Traiter avec un antibiotique oral efficace contre Shigella (Ciprofloxacine : 15 mg/kg deux fois par jour pendant 3 jours).
+- Revoir l'enfant après 2 jours si l'état ne s'améliore pas.
+
+--------------------------------------------------------------------------------
+MODULE 4 : FIÈVRE ET PALUDISME (TAZO SY REBIKA / MALARIA)
+--------------------------------------------------------------------------------
+Mots-clés de recherche : fièvre, tazo, mafana, tazo moka, malaria, paludisme, rebi-tazo, rougeole, tana, skoka, hazandrano, TDR.
+
+Évaluation :
+- Vérifier si l'enfant a le corps chaud au toucher ou une température axillaire de 37,5°C ou plus (rectale 38°C+).
+- Déterminer si le risque de paludisme est élevé (Madagascar est classé en zone d'endémie palustre continue à haut risque).
+- Réaliser ou vérifier le résultat du Test de Diagnostic Rapide (TDR / Fitsapana tazo haingana).
+
+CLASSIFICATION 4.1 : MALADIE PALUSTRE GRAVE AVEC FIÈVRE (TAZO MAFY)
+Signes : Fièvre ET n'importe quel signe général de danger OU raideur de la nuque (mafy goka).
+Action :
+- Évacuer d'urgence à l'hôpital.
+- Administrer une première dose d'Artésunate intra-musculaire ou intra-rectal d'urgence si disponible.
+- Donner une première dose d'un antibiotique à large spectre.
+- Traiter la fièvre élevée avec du Paracétamol.
+
+CLASSIFICATION 4.2 : PALUDISME / MALADIE PALUSTRE (MALARIA TSOTRA)
+Signes : Fièvre ET résultat du TDR Positif (+).
+Action :
+- Administrer une Combinaison Thérapeutique à base d'Artémisinine (CTA / ACT) par voie orale selon le poids et l'âge de l'enfant (ex: Artésunate + Luméfantrine) pendant 3 jours.
+- Donner du Paracétamol (15 mg/kg toutes les 6 heures) uniquement si la température dépasse 38,5°C pour le confort de l'enfant. Ne JAMAIS donner d'Aspirine ou d'Ibuprofène en cas de suspicion de paludisme ou de dengue (risque d'hémorragie).
+- Conseiller la mère sur l'utilisation de moustiquaires imprégnées (Namamo moka).
+
+CLASSIFICATION 4.3 : FIÈVRE NON PALUSTRE (TAZO TSOTRA TSY VALERE)
+Signes : Fièvre avec un résultat de TDR Négatif (-).
+Action :
+- Rechercher d'autres causes évidentes de fièvre (Infection urinaire, otite, poussée dentaire sévère).
+- Donner du Paracétamol pour calmer l'inconfort lié à la température élevée.
+- Revoir après 2 jours si la fièvre persiste.
+
+CLASSIFICATION 4.4 : ROUGEOLE (KORISA / RAMBOTEZA / ARETINA MENA)
+Signes : Éruption cutanée généralisée maculo-papuleuse ET l'un des signes suivants : toux, écoulement nasal (mandeha rano orona), ou yeux rouges (maso mena).
+Action :
+- Donner obligatoirement une dose de Vitamine A par voie orale pour protéger les yeux et la muqueuse intestinale (100 000 UI pour les enfants de 6 à 11 mois, 200 000 UI pour les 12 mois à 5 ans). Répéter une dose le lendemain.
+- Si complication oculaire (pus, opacité de la cornée) : Appliquer de l'onguent ophtalmique à la Tétracycline 1%.
+- Si la rougeole est grave (signes de danger ou détresse respiratoire) : Transférer d'urgence.
+
+--------------------------------------------------------------------------------
+MODULE 5 : MALNUTRITION ET ANÉMIE (TSY AMPY SAKAFO SY RANO RATRA)
+--------------------------------------------------------------------------------
+Mots-clés de recherche : malnutrition, anémie, tsy ampy sakafo, 90, rano ratra, hatsatra, malnutri, poid, taille, mivonto, kwashiorkor, PB, périmètre brachial.
+
+Évaluation :
+- Rechercher une émaciation visible grave (zaza mahia loatra, hita taolana).
+- Rechercher une pâleur au niveau de la paume des mains (tanana hatsatra be).
+- Rechercher des œdèmes bilatéraux au niveau des deux pieds (tongotra mivonto roa).
+- Mesurer le Périmètre Brachial (PB) au milieu du bras gauche à l'aide du ruban MUAC.
+
+CLASSIFICATION 5.1 : MALNUTRITION AIGUË SÉVÈRE (MAS / ARETINA TSY AMPY SAKAFO MAFY)
+Signes : Périmètre Brachial (PB) inférieur à 115 mm (11,5 cm) OU Émaciation visible grave OU Œdème des deux pieds (Kwashiorkor).
+Action :
+- Si l'enfant présente des complications médicales ou refuse de manger : Transférer d'urgence au Centre de Récupération Nutritionnelle Intensive (CRENI/Hôpital).
+- Si l'enfant n'a pas de complications et a de l'appétit : Orienter vers le Centre de Récupération Nutritionnelle Ambulatoire (CRENAM) pour recevoir des Aliments Thérapeutiques Prêts à l'Emploi (ATPE / Plumpy'Nut).
+
+CLASSIFICATION 5.2 : ANÉMIE GRAVE (TSY AMPY RA MAFY LOATRA)
+Signes : Pâleur palmaire intense / paumes des mains totalement blanches.
+Action :
+- Transférer d'urgence à l'hôpital pour transfusion sanguine potentielle.
+- Éviter d'administrer du fer par voie orale immédiatement si l'enfant est en état de choc.
+
+CLASSIFICATION 5.3 : ANÉMIE MODÉRÉE OU MALNUTRITION MODÉRÉE
+Signes : Pâleur palmaire légère OU Périmètre Brachial compris entre 115 mm et 125 mm.
+Action :
+- Donner du Fer / Acide folique par voie orale pendant 14 jours.
+- Donner un traitement antiparasitaire si l'enfant a plus de 1 an (Albendazole dose unique : 200 mg pour 12-23 mois, 400 mg pour 2 ans et plus).
+- Donner des conseils nutritionnels stricts à la mère (alimentation de complément enrichie).
+================================================================================
+FIN DE LA BASE DE DONNÉES DE SÉCURITÉ CLINIQUE - APPLICATION AINA
+================================================================================
