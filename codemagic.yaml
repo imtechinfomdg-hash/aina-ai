@@ -44,6 +44,10 @@ workflows:
             sed -i.bak 's/flutter.minSdkVersion/24/g' android/app/build.gradle || true
             sed -i.bak 's/flutter.targetSdkVersion/34/g' android/app/build.gradle || true
             sed -i.bak 's/flutter.compileSdkVersion/34/g' android/app/build.gradle || true
+          elif [ -f "android/app/build.gradle.kts" ]; then
+            sed -i.bak 's/flutter.minSdkVersion/24/g' android/app/build.gradle.kts || true
+            sed -i.bak 's/flutter.targetSdkVersion/34/g' android/app/build.gradle.kts || true
+            sed -i.bak 's/flutter.compileSdkVersion/34/g' android/app/build.gradle.kts || true
           else
             echo "Erreur: Le dossier android n'a pas été généré correctement."
             exit 1
