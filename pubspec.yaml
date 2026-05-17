@@ -32,7 +32,7 @@ dependencies:
   # Export PDF & Partage
   pdf: ^3.11.1
   printing: ^5.13.2
-  share_plus: ^9.0.0
+  share_plus: ^10.1.0
   
   # Base de données & Stockage (Local-first et RGPD)
   sqflite: ^2.3.0
