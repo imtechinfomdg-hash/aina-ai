@@ -33,13 +33,28 @@ class GamificationService {
     }
   }
 
-  /// Incrémente les points et vérifie les badges
+  /// Incrémente les points selon l'action effectuée et vérifie les badges
   /// Renvoie le(s) nom(s) du/des nouveau(x) badge(s) débloqué(s) s'il y en a
-  Future<List<String>> addPointsForConstante() async {
+  Future<List<String>> addPointsForAction(String action) async {
     if (kIsWeb) return [];
     try {
+      int pointsToAdd = 0;
+      switch (action) {
+        case 'constante':
+          pointsToAdd = 10;
+          break;
+        case 'vaccination':
+          pointsToAdd = 20;
+          break;
+        case 'medicament':
+          pointsToAdd = 5;
+          break;
+        default:
+          pointsToAdd = 5;
+      }
+
       final currentPoints = await getPoints();
-      final newPoints = currentPoints + pointsPerConstante;
+      final newPoints = currentPoints + pointsToAdd;
       
       await _storage.write(key: _keyPoints, value: newPoints.toString());
       return await _checkAndUnlockBadges(newPoints);

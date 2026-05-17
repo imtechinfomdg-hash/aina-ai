@@ -2,6 +2,7 @@ import '../../data/models/vaccine_model.dart';
 import '../../data/models/child_model.dart';
 import '../../data/database/database_helper.dart';
 import 'notification_service.dart';
+import 'gamification_service.dart';
 
 enum VaccineStatus {
   completed,
@@ -189,6 +190,8 @@ class VaccinationService {
     if (vaccine.id != null) {
       NotificationService().cancelReminder(vaccine.id! + 100000);
     }
+
+    GamificationService().addPointsForAction('vaccination');
   }
 
   /// Annule une vaccination cochée par erreur

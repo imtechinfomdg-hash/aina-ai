@@ -11,7 +11,7 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  static const Color turquoise = Color(0xFF00C4B5); // Turquoise from the image
+  static const Color primaryGreen = Color(0xFF2E7D32); // Deep green
   static const Color creamBackground = Colors.white; 
   
   bool _accepted = false;
@@ -44,7 +44,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         decoration: BoxDecoration(
-          color: isSelected ? turquoise : Colors.grey.shade100,
+          color: isSelected ? primaryGreen : Colors.grey.shade100,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
@@ -137,12 +137,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      // Logo Aina
+                      const Text(
+                        "AINA",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 48,
+                          fontWeight: FontWeight.w900,
+                          color: primaryGreen,
+                          letterSpacing: 4.0,
+                          height: 1.0,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
                       // Title
                       Text(
                         LocalizationService().translate('care_for_baby'),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                          fontSize: 32,
+                          fontSize: 28,
                           fontWeight: FontWeight.w800,
                           color: Colors.black87,
                           height: 1.2,
@@ -175,7 +188,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               height: 24,
                               child: Checkbox(
                                 value: _accepted,
-                                activeColor: turquoise,
+                                activeColor: primaryGreen,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                                 onChanged: (val) {
                                   setState(() => _accepted = val ?? false);
@@ -196,7 +209,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     TextSpan(text: LocalizationService().translate('agree_to')),
                                     TextSpan(
                                       text: LocalizationService().translate('terms'),
-                                      style: const TextStyle(color: turquoise, fontWeight: FontWeight.bold),
+                                      style: const TextStyle(color: primaryGreen, fontWeight: FontWeight.bold),
                                     ),
                                     TextSpan(
                                       text: LocalizationService().translate('and_consent'),
@@ -216,7 +229,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         height: 60,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: turquoise,
+                            backgroundColor: primaryGreen,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
@@ -242,7 +255,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     color: Colors.white,
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Icon(Icons.arrow_forward_ios, size: 16, color: turquoise),
+                                  child: const Icon(Icons.arrow_forward_ios, size: 16, color: primaryGreen),
                                 ),
                               ),
                             ],

@@ -6,6 +6,7 @@ import '../../data/models/medication_reminder_model.dart';
 import '../../domain/services/notification_service.dart';
 import '../../domain/services/llama_service.dart';
 import '../../domain/services/knowledge_base_service.dart';
+import '../../domain/services/gamification_service.dart';
 
 class MedicationTrackerScreen extends StatefulWidget {
   final ChildModel child;
@@ -211,6 +212,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen> {
                            final id = await _dbHelper.addReminder(newReminder);
                            final savedReminder = newReminder.copyWith(id: id);
                            await _notificationService.scheduleMedicationReminder(savedReminder);
+                           await GamificationService().addPointsForAction('medicament');
                          }
                          _loadReminders();
                        }

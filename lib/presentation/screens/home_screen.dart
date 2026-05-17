@@ -33,10 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = true;
   String _dailyTip = "";
 
-  static const Color turquoise = Color(0xFF00C4B5);
-  static const Color darkBlueCard = Color(0xFF174266);
-  static const Color bgGrey = Color(0xFFE5ECEF);
-  static const Color iconBgLightBlue = Color(0xFFE8F4F8);
+  static const Color primaryGreen = Color(0xFF2E7D32);
+  static const Color darkGreenCard = Color(0xFF1B5E20);
+  static const Color creamBackground = Color(0xFFFFFAF1);
+  static const Color iconBgLightGreen = Color(0xFFE8F5E9);
 
   final List<String> _pcimeTips = [
     "Breastfeed exclusively up to 6 months for a strong immunity.",
@@ -92,9 +92,14 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  LocalizationService().translate('hello_mom'),
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                const Text(
+                  "AINA",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w900,
+                    color: primaryGreen,
+                    letterSpacing: 2.0,
+                  ),
                 ),
                 Text(
                   LocalizationService().translate('baby_doing_great'),
@@ -121,12 +126,66 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget _buildGamificationCard() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 4))
+        ]
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(color: Colors.orange.shade50, shape: BoxShape.circle),
+            child: const Icon(Icons.military_tech, color: Colors.orange, size: 32),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Récompenses Parents", style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 15)),
+                const SizedBox(height: 4),
+                Text(
+                  "$_points Points • ${_badges.isNotEmpty ? _badges.last : 'Débutant'}", 
+                  style: TextStyle(color: Colors.grey.shade600, fontSize: 13, fontWeight: FontWeight.w500)
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: primaryGreen.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.star, size: 14, color: primaryGreen),
+                const SizedBox(width: 4),
+                Text(
+                  "+ pts",
+                  style: TextStyle(color: primaryGreen, fontWeight: FontWeight.bold, fontSize: 12),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _buildStatusCard() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: darkBlueCard,
+        color: darkGreenCard,
         borderRadius: BorderRadius.circular(24),
         image: const DecorationImage(
           image: AssetImage('assets/images/baby_background.png'),
@@ -171,14 +230,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: turquoise,
+                    backgroundColor: primaryGreen,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                     elevation: 0,
                     minimumSize: const Size(120, 36),
                     padding: const EdgeInsets.symmetric(horizontal: 16)
                   ),
-                  child: const Text("Add Activity", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                  child: Text(LocalizationService().translate('add_activity'), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                 )
               ],
             ),
@@ -198,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
           _iconItem(Icons.water_drop, LocalizationService().translate('feed'), Colors.blue),
           _iconItem(Icons.bedtime, LocalizationService().translate('sleep'), Colors.indigo),
           _iconItem(Icons.baby_changing_station, LocalizationService().translate('diaper'), Colors.purple),
-          _iconItem(Icons.auto_graph, LocalizationService().translate('growth'), turquoise, onTap: () {
+          _iconItem(Icons.auto_graph, LocalizationService().translate('growth'), primaryGreen, onTap: () {
             if (_children.isNotEmpty) {
               _navigateToChildDashboard(_children.first);
             }
@@ -267,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? turquoise : Colors.white,
+          color: isSelected ? primaryGreen : Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: isSelected ? [] : [
             BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 4, offset: const Offset(0, 2))
@@ -414,7 +473,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgGrey,
+      backgroundColor: creamBackground,
       body: Stack(
         children: [
           SafeArea(
@@ -424,6 +483,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildTopProfile(),
+                  _buildGamificationCard(),
                   _buildStatusCard(),
                   _buildGridIcons(),
                   _buildFilterChips(),
@@ -453,8 +513,8 @@ class _ChildDashboardScreenState extends State<ChildDashboardScreen> {
   List<ConstanteModel> _constantes = [];
   bool _isLoading = true;
   
-  static const Color turquoise = Color(0xFF00C4B5);
-  static const Color bgGrey = Color(0xFFE5ECEF);
+  static const Color primaryGreen = Color(0xFF2E7D32);
+  static const Color creamBackground = Color(0xFFFFFAF1);
 
   @override
   void initState() {
@@ -497,7 +557,7 @@ class _ChildDashboardScreenState extends State<ChildDashboardScreen> {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
-                  color: isSelected ? turquoise : Colors.transparent,
+                  color: isSelected ? primaryGreen : Colors.transparent,
                   borderRadius: BorderRadius.circular(26),
                 ),
                 child: Text(
@@ -557,7 +617,7 @@ class _ChildDashboardScreenState extends State<ChildDashboardScreen> {
                   child: CircularProgressIndicator(
                     value: 0.7, strokeWidth: 24,
                     color: Colors.blue.shade600,
-                    backgroundColor: turquoise.withOpacity(0.5),
+                    backgroundColor: primaryGreen.withOpacity(0.5),
                   )
                 ),
                 Column(
@@ -578,14 +638,14 @@ class _ChildDashboardScreenState extends State<ChildDashboardScreen> {
               const SizedBox(width: 8),
               _legendItem(Colors.indigo, "${LocalizationService().translate('sleep')} (3)"),
               const SizedBox(width: 8),
-              _legendItem(turquoise, "${LocalizationService().translate('diaper')} (3)"),
+              _legendItem(primaryGreen, "${LocalizationService().translate('diaper')} (3)"),
             ],
           ),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _legendItem(turquoise.withOpacity(0.3), "${LocalizationService().translate('bath')} (1)"),
+              _legendItem(primaryGreen.withOpacity(0.3), "${LocalizationService().translate('bath')} (1)"),
               const SizedBox(width: 8),
               _legendItem(Colors.blue.shade100, "${LocalizationService().translate('playtime')} (1)"),
             ],
@@ -626,7 +686,7 @@ class _ChildDashboardScreenState extends State<ChildDashboardScreen> {
         children: [
           Text(LocalizationService().translate('todays_overview'), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
           const SizedBox(height: 24),
-          _barItem(LocalizationService().translate('feed'), 0.85, turquoise),
+          _barItem(LocalizationService().translate('feed'), 0.85, primaryGreen),
           _barItem(LocalizationService().translate('sleep'), 0.70, Colors.indigo.shade200),
           _barItem(LocalizationService().translate('diaper'), 0.65, Colors.blue.shade300),
           _barItem(LocalizationService().translate('hydration'), 0.45, Colors.amber.shade300),
@@ -665,9 +725,9 @@ class _ChildDashboardScreenState extends State<ChildDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgGrey,
+      backgroundColor: creamBackground,
       appBar: AppBar(
-        backgroundColor: bgGrey,
+        backgroundColor: creamBackground,
         elevation: 0,
         leading: Container(
           margin: const EdgeInsets.all(8),
