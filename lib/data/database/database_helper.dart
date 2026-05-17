@@ -17,7 +17,93 @@ class DatabaseHelper {
   final List<MedicationReminderModel> _mockReminders = [];
   int _mockIdCounter = 1;
 
-  DatabaseHelper._init();
+  DatabaseHelper._init() {
+    if (kIsWeb) {
+      _seedMockData();
+    }
+  }
+
+  void _seedMockData() {
+    final now = DateTime.now();
+    
+    // Baby 1: Koto
+    final koto = ChildModel(
+      id: _mockIdCounter++,
+      firstName: 'Koto',
+      birthDate: now.subtract(const Duration(days: 180)).toIso8601String(),
+      gender: 'Garçon',
+      weight: 7.5,
+      height: 68.0,
+    );
+    _mockChildren.add(koto);
+    _mockConstantes.add(ConstanteModel(
+      id: _mockIdCounter++,
+      enfantId: koto.id!,
+      date: now.toIso8601String(),
+      poids: 7.5,
+      taille: 68.0,
+      temperature: 37.1,
+      perimetreBrachial: 14.5,
+    ));
+
+    // Baby 2: Soa
+    final soa = ChildModel(
+      id: _mockIdCounter++,
+      firstName: 'Soa',
+      birthDate: now.subtract(const Duration(days: 540)).toIso8601String(),
+      gender: 'Fille',
+      weight: 10.2,
+      height: 82.0,
+    );
+    _mockChildren.add(soa);
+    _mockConstantes.add(ConstanteModel(
+      id: _mockIdCounter++,
+      enfantId: soa.id!,
+      date: now.subtract(const Duration(days: 1)).toIso8601String(),
+      poids: 10.2,
+      taille: 82.0,
+      temperature: 38.5,
+      perimetreBrachial: 15.0,
+    ));
+    _mockReminders.add(MedicationReminderModel(
+      id: _mockIdCounter++,
+      enfantId: soa.id!,
+      medName: 'Paracétamol',
+      dosage: '10 ml',
+      time: '08:00',
+      isActive: true,
+    ));
+
+    // Baby 3: Rina
+    final rina = ChildModel(
+      id: _mockIdCounter++,
+      firstName: 'Rina',
+      birthDate: now.subtract(const Duration(days: 730)).toIso8601String(),
+      gender: 'Garçon',
+      weight: 9.0,
+      height: 85.0,
+      temperature: 36.8,
+    );
+    _mockChildren.add(rina);
+    _mockConstantes.add(ConstanteModel(
+      id: _mockIdCounter++,
+      enfantId: rina.id!,
+      date: now.subtract(const Duration(days: 30)).toIso8601String(),
+      poids: 8.8,
+      taille: 84.5,
+      temperature: 36.8,
+      perimetreBrachial: 11.5,
+    ));
+    _mockConstantes.add(ConstanteModel(
+      id: _mockIdCounter++,
+      enfantId: rina.id!,
+      date: now.toIso8601String(),
+      poids: 9.0,
+      taille: 85.0,
+      temperature: 36.9,
+      perimetreBrachial: 12.0,
+    ));
+  }
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -98,6 +184,80 @@ CREATE TABLE rappels_medicaments (
   FOREIGN KEY (enfantId) REFERENCES children (id) ON DELETE CASCADE
 )
 ''');
+
+    // Seeding with default data
+    await _seedInitialData(db);
+  }
+
+  Future<void> _seedInitialData(Database db) async {
+    final now = DateTime.now();
+    
+    // Baby 1: Koto (Garçon, 6 mois)
+    final kotoId = await db.insert('children', {
+      'firstName': 'Koto',
+      'birthDate': now.subtract(const Duration(days: 180)).toIso8601String(),
+      'gender': 'Garçon',
+      'weight': 7.5,
+      'height': 68.0,
+    });
+    await db.insert('constantes', {
+      'enfantId': kotoId,
+      'date': now.toIso8601String(),
+      'poids': 7.5,
+      'taille': 68.0,
+      'temperature': 37.1,
+      'perimetre_brachial': 14.5,
+    });
+    
+    // Baby 2: Soa (Fille, 18 mois, fièvre hier)
+    final soaId = await db.insert('children', {
+      'firstName': 'Soa',
+      'birthDate': now.subtract(const Duration(days: 540)).toIso8601String(),
+      'gender': 'Fille',
+      'weight': 10.2,
+      'height': 82.0,
+    });
+    await db.insert('constantes', {
+      'enfantId': soaId,
+      'date': now.subtract(const Duration(days: 1)).toIso8601String(),
+      'poids': 10.2,
+      'taille': 82.0,
+      'temperature': 38.5,
+      'perimetre_brachial': 15.0,
+    });
+    await db.insert('rappels_medicaments', {
+      'enfantId': soaId,
+      'medName': 'Paracétamol',
+      'dosage': '10 ml',
+      'time': '08:00',
+      'isActive': 1,
+    });
+    
+    // Baby 3: Rina (Garçon, 2 ans, suivi malnutrition)
+    final rinaId = await db.insert('children', {
+      'firstName': 'Rina',
+      'birthDate': now.subtract(const Duration(days: 730)).toIso8601String(),
+      'gender': 'Garçon',
+      'weight': 9.0, // Faible
+      'height': 85.0,
+      'temperature': 36.8,
+    });
+    await db.insert('constantes', {
+      'enfantId': rinaId,
+      'date': now.subtract(const Duration(days: 30)).toIso8601String(),
+      'poids': 8.8,
+      'taille': 84.5,
+      'temperature': 36.8,
+      'perimetre_brachial': 11.5, // Rouge (malnutrition sévère)
+    });
+    await db.insert('constantes', {
+      'enfantId': rinaId,
+      'date': now.toIso8601String(),
+      'poids': 9.0,
+      'taille': 85.0,
+      'temperature': 36.9,
+      'perimetre_brachial': 12.0, // Jaune (malnutrition modérée)
+    });
   }
 
   Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
@@ -179,6 +339,29 @@ CREATE TABLE rappels_medicaments (
     final db = await instance.database;
     final result = await db.query('children', orderBy: 'firstName ASC');
     return result.map((json) => ChildModel.fromMap(json)).toList();
+  }
+
+  Future<ChildModel?> getChild(int id) async {
+    if (kIsWeb) {
+      try {
+        return _mockChildren.firstWhere((c) => c.id == id);
+      } catch (e) {
+        return null;
+      }
+    }
+    final db = await instance.database;
+    final maps = await db.query(
+      'children',
+      columns: null,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (maps.isNotEmpty) {
+      return ChildModel.fromMap(maps.first);
+    } else {
+      return null;
+    }
   }
 
   Future<int> updateChild(ChildModel child) async {

@@ -138,4 +138,38 @@ Y a-t-il une interaction dangereuse ?<|eot_id|><|start_header_id|>assistant<|end
 
     return null;
   }
+
+  /// Fonctionnalité OCR : Extrait les informations structurées depuis un texte brut (via NER / Regex / Llama)
+  Future<Map<String, String>> extractMedicalInfo(String rawOcrText) async {
+    if (!_isInitialized) {
+      if (!kIsWeb) throw Exception("Le modèle Llama n'est pas prêt.");
+    }
+    
+    final String systemPrompt = """Tu es 'Aina', un assistant d'extraction d'informations médicales.
+On va te fournir le texte brut issu de l'OCR d'un document médical malgache ou français (ex: un compte-rendu, relevé de vaccination, ordonnance).
+Ta tâche: extraire les informations clés suivantes si elles existent. 
+Réponds STRICTEMENT au format JSON suivant sans aucun autre texte:
+{
+  "patient_name": "nom de l'enfant ou du patient",
+  "date": "date trouvée sur le document (JJ/MM/AAAA)",
+  "diagnosis": "le diagnostic principal, ou 'Aucun' si non trouvé"
+}
+Si un champ est introuvable, mets "". Ne justifie pas ta réponse.""";
+
+    final String prompt = '''<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+$systemPrompt<|eot_id|><|start_header_id|>user<|end_header_id|>
+Voici le texte OCR :
+$rawOcrText<|eot_id|><|start_header_id|>assistant<|end_header_id|>''';
+
+    // Simulation de l'inférence :
+    // final response = await _llama?.prompt(prompt, temperature: 0.1, maxTokens: 150);
+    // parser la reponse JSON et la renvoyer...
+    
+    await Future.delayed(const Duration(seconds: 1));
+    return {
+      "patient_name": "Koto",
+      "date": "10/05/2026",
+      "diagnosis": "Infection respiratoire (simulé)",
+    };
+  }
 }

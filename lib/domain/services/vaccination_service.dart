@@ -1,6 +1,7 @@
 import '../../data/models/vaccine_model.dart';
 import '../../data/models/child_model.dart';
 import '../../data/database/database_helper.dart';
+import 'notification_service.dart';
 
 enum VaccineStatus {
   completed,
@@ -95,6 +96,10 @@ class VaccinationService {
     final existingVaccines = await _dbHelper.getVaccinesForChild(child.id!);
     final existingKeys = existingVaccines.map((v) => v.vaccineKey).toSet();
 
+    // Import temporaire pour ne pas briser la logique si importé globalement
+    // La déclaration sera vérifiée. On suppose que NotificationService est utilisé.
+    // Pour éviter boucle importe ou erreurs, instanciez-le localement ou ajoutez l'import en haut.
+    
     for (var item in standardSchedule) {
       if (item.isForGirlsOnly && child.gender.toLowerCase() != 'fille' && child.gender.toLowerCase() != 'female' && child.gender.toLowerCase() != 'f') {
         continue; // Ignorer le HPV pour les garçons
@@ -109,7 +114,36 @@ class VaccinationService {
           datePlanned: datePlanned,
           isCompleted: false,
         );
-        await _dbHelper.addVaccine(newVaccine);
+        final id = await _dbHelper.addVaccine(newVaccine);
+        
+        // Schedule notification for this new vaccine
+        final savedVaccine = VaccineModel(
+          id: id,
+          enfantId: newVaccine.enfantId,
+          vaccineKey: newVaccine.vaccineKey,
+          vaccineName: newVaccine.vaccineName,
+          datePlanned: newVaccine.datePlanned,
+          isCompleted: newVaccine.isCompleted,
+        );
+        _scheduleNotificationForVaccine(savedVaccine, child);
+      }
+    }
+  }
+
+  void _scheduleNotificationForVaccine(VaccineModel savedVaccine, ChildModel child) {
+    NotificationService().scheduleVaccinationReminder(savedVaccine, child);
+  }
+
+  Future<void> scheduleAllUpcomingVaccinations() async {
+    final children = await _dbHelper.readAllChildren();
+    for (var child in children) {
+      if (child.id != null) {
+        final vaccines = await _dbHelper.getVaccinesForChild(child.id!);
+        for (var vaccine in vaccines) {
+          if (!vaccine.isCompleted) {
+            _scheduleNotificationForVaccine(vaccine, child);
+          }
+        }
       }
     }
   }
@@ -150,6 +184,11 @@ class VaccinationService {
       isCompleted: true,
     );
     await _dbHelper.updateVaccine(updatedVaccine);
+    
+    // Annule la notification vu que c'est fait
+    if (vaccine.id != null) {
+      NotificationService().cancelReminder(vaccine.id! + 100000);
+    }
   }
 
   /// Annule une vaccination cochée par erreur
@@ -164,5 +203,11 @@ class VaccinationService {
       isCompleted: false,
     );
     await _dbHelper.updateVaccine(updatedVaccine);
+    
+    // Reprogramme la notification
+    final child = await _dbHelper.getChild(vaccine.enfantId);
+    if (child != null) {
+      _scheduleNotificationForVaccine(updatedVaccine, child);
+    }
   }
 }

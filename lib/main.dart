@@ -10,6 +10,7 @@ import 'domain/services/biometric_security_service.dart';
 import 'domain/services/hardware_service.dart';
 import 'domain/services/notification_service.dart';
 import 'domain/services/localization_service.dart';
+import 'domain/services/vaccination_service.dart';
 
 void main() {
   runZonedGuarded(() async {
@@ -21,6 +22,9 @@ void main() {
     
     // Initialise les notifications locales
     await NotificationService().init();
+    
+    // Programme les rappels de vaccination
+    await VaccinationService().scheduleAllUpcomingVaccinations();
     
     // 2. Évaluation matérielle (RAM)
     final hardwareService = HardwareService();

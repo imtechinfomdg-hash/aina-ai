@@ -6,6 +6,7 @@ import '../../domain/services/gamification_service.dart';
 import 'chat_screen.dart';
 import 'emergency_hub_screen.dart';
 import 'first_aid_screen.dart';
+import 'document_scanner_screen.dart';
 import 'vaccine_tracker_screen.dart';
 import 'medication_tracker_screen.dart';
 import 'system_settings_screen.dart';
@@ -244,8 +245,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: _chipItem(LocalizationService().translate('baby_assistant'), false, () {
+            child: _chipItem(LocalizationService().translate('baby_assistant') ?? 'IA', false, () {
                Navigator.push(context, MaterialPageRoute(builder: (_) => const ChatScreen()));
+            }),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: _chipItem("Scanner", false, () {
+               Navigator.push(context, MaterialPageRoute(builder: (_) => const DocumentScannerScreen()));
             }),
           ),
         ],

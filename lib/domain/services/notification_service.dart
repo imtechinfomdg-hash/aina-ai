@@ -80,6 +80,49 @@ class NotificationService {
     );
   }
 
+  Future<void> scheduleVaccinationReminder(dynamic vaccine, dynamic child) async {
+    if (kIsWeb) return;
+    if (vaccine.id == null) return;
+
+    // Use an offset to avoid collisions with medication reminders
+    final id = vaccine.id! + 100000;
+
+    // Schedule for 8:00 AM on the planned date
+    DateTime plannedDate = vaccine.datePlanned;
+    DateTime scheduledDate = DateTime(
+      plannedDate.year,
+      plannedDate.month,
+      plannedDate.day,
+      8, 0, 0,
+    );
+
+    // If the planned date is already in the past, or it's past 8:00 AM today, don't schedule a new reminder
+    // Instead maybe just ignore if it's past
+    if (scheduledDate.isBefore(DateTime.now())) {
+      // If it's today but later than 8am, we could schedule it for right now + 1 min, but maybe ignore
+      return;
+    }
+
+    await _notificationsPlugin.zonedSchedule(
+      id,
+      'Rappel de Vaccination',
+      'Le vaccin de ${child.name} (${vaccine.vaccineName}) est prévu pour aujourd\\'hui.',
+      tz.TZDateTime.from(scheduledDate, tz.local),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'vaccination_reminders',
+          'Rappels de vaccinations',
+          channelDescription: 'Notifications pour les dates prévues de vaccination',
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      // No matchDateTimeComponents because it's a one-time event
+    );
+  }
+
   Future<void> cancelReminder(int id) async {
     if (kIsWeb) return;
     await _notificationsPlugin.cancel(id);
