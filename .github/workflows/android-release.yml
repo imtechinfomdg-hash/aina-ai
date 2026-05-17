@@ -47,15 +47,27 @@ jobs:
         run: |
           mkdir -p assets/audio assets/l10n
           flutter create --org com.aina --project-name aina --platforms=android .
+          
+          # Configuration pour build.gradle (Groovy)
           if [ -f "android/app/build.gradle" ]; then
             sed -i.bak 's/flutter.minSdkVersion/24/g' android/app/build.gradle || true
             sed -i.bak 's/flutter.targetSdkVersion/34/g' android/app/build.gradle || true
             sed -i.bak 's/flutter.compileSdkVersion/34/g' android/app/build.gradle || true
             
-            # Configuration pour flutter_local_notifications (desugaring)
-            sed -i.bak 's/compileOptions {/compileOptions {\n        coreLibraryDesugaringEnabled true/g' android/app/build.gradle
-            sed -i.bak 's/defaultConfig {/defaultConfig {\n        multiDexEnabled true/g' android/app/build.gradle
-            echo "dependencies { coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4' }" >> android/app/build.gradle
+            sed -i.bak 's/sourceCompatibility/coreLibraryDesugaringEnabled true\n        sourceCompatibility/g' android/app/build.gradle || true
+            sed -i.bak 's/defaultConfig {/defaultConfig {\n        multiDexEnabled true/g' android/app/build.gradle || true
+            echo -e "\ndependencies {\n    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.2'\n}" >> android/app/build.gradle
+          fi
+
+          # Configuration pour build.gradle.kts (Kotlin DSL - Flutter 3.16+)
+          if [ -f "android/app/build.gradle.kts" ]; then
+            sed -i.bak 's/flutter.minSdkVersion/24/g' android/app/build.gradle.kts || true
+            sed -i.bak 's/flutter.targetSdkVersion/34/g' android/app/build.gradle.kts || true
+            sed -i.bak 's/flutter.compileSdkVersion/34/g' android/app/build.gradle.kts || true
+            
+            sed -i.bak 's/sourceCompatibility/isCoreLibraryDesugaringEnabled = true\n        sourceCompatibility/g' android/app/build.gradle.kts || true
+            sed -i.bak 's/defaultConfig {/defaultConfig {\n        multiDexEnabled = true/g' android/app/build.gradle.kts || true
+            echo -e "\ndependencies {\n    coreLibraryDesugaring(\"com.android.tools:desugar_jdk_libs:2.1.2\")\n}" >> android/app/build.gradle.kts
           fi
 
       - name: Installation des dépendances Flutter
