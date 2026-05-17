@@ -7,6 +7,9 @@ workflows:
     cache:
       cache_paths:
         - assets/models/
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/.pub-cache
+        - $HOME/.gradle/caches
     scripts:
       - name: Create assets/models directory
         script: |
