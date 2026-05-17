@@ -29,15 +29,22 @@ workflows:
           fi
           ls -lh assets/models/
           
-      - name: Generate Android folder
-        script: |
-          flutter create --platforms=android .
-          # S'assure que le minSdkVersion est suffisant (24) pour google_mlkit_text_recognition et llama_cpp_dart
-          sed -i.bak 's/flutter.minSdkVersion/24/g' android/app/build.gradle || true
-          
       - name: Get Flutter packages
         script: |
           flutter pub get
+          
+      - name: Generate Android folder
+        script: |
+          flutter create --org com.aina --project-name aina --platforms=android .
+          # S'assure que le minSdkVersion est suffisant (24) pour google_mlkit_text_recognition et llama_cpp_dart
+          if [ -f "android/app/build.gradle" ]; then
+            sed -i.bak 's/flutter.minSdkVersion/24/g' android/app/build.gradle || true
+            sed -i.bak 's/flutter.targetSdkVersion/34/g' android/app/build.gradle || true
+            sed -i.bak 's/flutter.compileSdkVersion/34/g' android/app/build.gradle || true
+          else
+            echo "Erreur: Le dossier android n'a pas été généré correctement."
+            exit 1
+          fi
           
       - name: Build Release APK
         script: |
