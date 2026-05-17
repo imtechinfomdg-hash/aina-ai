@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'knowledge_base_service.dart';
 
-// Import fictif à décommenter lors de la compilation réelle avec llamadart
-// import 'package:llamadart/llamadart.dart';
+// Import pour la compilation réelle avec llama_cpp_dart
+import 'package:llama_cpp_dart/llama_cpp_dart.dart';
 
 /// Service gérant l'exécution de l'inférence locale (On-Device) via llama.cpp
 class LlamaService {

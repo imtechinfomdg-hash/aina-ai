@@ -69,7 +69,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Positioned.fill(
             bottom: MediaQuery.of(context).size.height * 0.4,
             child: Image.asset(
-              'assets/images/baby_b.png',
+              'assets/images/baby_background.png',
               fit: BoxFit.cover,
               alignment: Alignment.topCenter,
               errorBuilder: (context, error, stackTrace) {

@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           const CircleAvatar(
             radius: 24,
-            backgroundImage: AssetImage('assets/images/baby_b.png'), // placeholder
+            backgroundImage: AssetImage('assets/images/baby_background.png'), // placeholder
             backgroundColor: Colors.grey,
           ),
           const SizedBox(width: 12),
@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
         color: darkBlueCard,
         borderRadius: BorderRadius.circular(24),
         image: const DecorationImage(
-          image: AssetImage('assets/images/baby_b.png'),
+          image: AssetImage('assets/images/baby_background.png'),
           fit: BoxFit.cover,
           alignment: Alignment.centerRight,
           opacity: 0.2, // Subtle background effect behind
@@ -288,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         image: const DecorationImage(
-          image: AssetImage('assets/images/baby_b.png'),
+          image: AssetImage('assets/images/baby_background.png'),
           fit: BoxFit.cover,
         ),
       ),
