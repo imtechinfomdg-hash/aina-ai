@@ -16,7 +16,6 @@ class EmergencyHubScreen extends StatefulWidget {
 class _EmergencyHubScreenState extends State<EmergencyHubScreen> {
   final EmergencyService _emergencyService = EmergencyService();
   bool _isLoading = true;
-  String _searchQuery = '';
 
   // Couleurs de la charte graphique Aina
   static const Color creamBackground = Color(0xFFFFFAF1);
@@ -271,14 +270,7 @@ class _EmergencyHubScreenState extends State<EmergencyHubScreen> {
       );
     }
 
-    var pharmacies = _emergencyService.getAllPharmacies();
-    if (_searchQuery.isNotEmpty) {
-      final query = _searchQuery.toLowerCase();
-      pharmacies = pharmacies.where((p) {
-        return p.nom.toLowerCase().contains(query) || p.commune.toLowerCase().contains(query);
-      }).toList();
-    }
-    
+    final pharmacies = _emergencyService.getAllPharmacies();
     final hopitaux = _emergencyService.getAllHopitaux();
     final ambulances = _emergencyService.getAllAmbulances();
 
@@ -307,38 +299,10 @@ class _EmergencyHubScreenState extends State<EmergencyHubScreen> {
         body: TabBarView(
           children: [
             // Onglet: Pharmacies
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Rechercher par nom ou commune...",
-                      prefixIcon: const Icon(Icons.search, color: primaryGreen),
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                      shadowColor: Colors.black.withOpacity(0.1),
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        _searchQuery = value;
-                      });
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 24),
-                    itemCount: pharmacies.length,
-                    itemBuilder: (context, index) => _buildPharmacieCard(pharmacies[index]),
-                  ),
-                ),
-              ],
+            ListView.builder(
+              padding: const EdgeInsets.only(top: 16, bottom: 24),
+              itemCount: pharmacies.length,
+              itemBuilder: (context, index) => _buildPharmacieCard(pharmacies[index]),
             ),
             // Onglet: Hôpitaux
             ListView.builder(
