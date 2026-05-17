@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'emergency_hub_screen.dart';
 
 class FirstAidScreen extends StatelessWidget {
   const FirstAidScreen({Key? key}) : super(key: key);
@@ -25,6 +26,17 @@ class FirstAidScreen extends StatelessWidget {
         backgroundColor: redEmergency,
         foregroundColor: Colors.white,
         elevation: 0,
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const EmergencyHubScreen()),
+          );
+        },
+        backgroundColor: redEmergency,
+        icon: const Icon(Icons.maps_ugc_rounded), // phone icon logic
+        label: const Text("Urgences", style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),

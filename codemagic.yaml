@@ -4,22 +4,29 @@ workflows:
     max_build_duration: 120
     environment:
       flutter: stable
+    cache:
+      cache_paths:
+        - assets/models/
     scripts:
       - name: Create assets/models directory
         script: |
           mkdir -p assets/models
           
-      - name: Download Llama-3.2-1B GGUF Model from Google Drive
+      - name: Download Llama-3.2-1B GGUF Model from Hugging Face
         script: |
-          FILE_ID="1G2MWbOXdDgPRbU-fn2DbARNFTNFp97m9"
           DEST="assets/models/llama-3.2-1b-instruct-q4_k_m.gguf"
-          echo "Téléchargement du modèle $FILE_ID vers $DEST..."
+          HF_URL="https://huggingface.co/hugging-quants/Llama-3.2-1B-Instruct-Q4_K_M-GGUF/resolve/main/llama-3.2-1b-instruct-q4_k_m.gguf"
           
-          # Méthode wget pour contourner l'avertissement de scan antivirus Google Drive pour les gros fichiers
-          wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id='${FILE_ID} -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id="${FILE_ID} -O ${DEST}
-          rm -f /tmp/cookies.txt
-          
-          echo "Téléchargement terminé."
+          if [ -f "$DEST" ]; then
+            echo "Le modèle est déjà présent dans le cache. Skip téléchargement."
+          else
+            echo "Téléchargement du modèle depuis Hugging Face vers $DEST..."
+            
+            # Utilisation de wget avec -L pour suivre les redirections de Hugging Face
+            wget -L -O ${DEST} "${HF_URL}"
+            
+            echo "Téléchargement terminé."
+          fi
           ls -lh assets/models/
           
       - name: Generate Android folder

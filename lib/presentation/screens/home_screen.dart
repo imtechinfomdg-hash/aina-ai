@@ -298,8 +298,14 @@ class _HomeScreenState extends State<HomeScreen> {
           _chipItem(LocalizationService().translate('routine'), true, null),
           const SizedBox(width: 8),
           Expanded(
-            child: _chipItem(LocalizationService().translate('add_log'), false, () {
+            child: _chipItem("Premiers Secours", false, () {
                Navigator.push(context, MaterialPageRoute(builder: (_) => const FirstAidScreen()));
+            }),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: _chipItem("Urgences", false, () {
+               Navigator.push(context, MaterialPageRoute(builder: (_) => const EmergencyHubScreen()));
             }),
           ),
           const SizedBox(width: 8),
@@ -432,9 +438,9 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _navItem(Icons.home_filled, 0),
-            _navItem(Icons.calendar_today, 1),
-            _navItem(Icons.health_and_safety, 2),
-            _navItem(Icons.person_outline, 3),
+            _navItem(Icons.medical_services, 1), // First aid screen
+            _navItem(Icons.health_and_safety, 2), // Meds tracking
+            _navItem(Icons.person_outline, 3), // Settings
           ],
         ),
       ),
@@ -446,8 +452,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: () {
         setState(() => _currentIndex = index);
-        if (index == 2) {
-          // Navigating to Meds Tracker or First Aid as requested
+        if (index == 1) {
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const FirstAidScreen()));
+        } else if (index == 2) {
+          // Navigating to Meds Tracker as requested
           if (_children.isNotEmpty) {
             Navigator.push(context, MaterialPageRoute(builder: (_) => MedicationTrackerScreen(child: _children.first)));
           }
