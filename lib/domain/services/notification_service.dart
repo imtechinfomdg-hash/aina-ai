@@ -63,7 +63,7 @@ class NotificationService {
     await _notificationsPlugin.zonedSchedule(
       id,
       'Rappel Médicament',
-      'Il est l\\'heure de prendre : ${reminder.medName} (${reminder.dosage})',
+      "Il est l'heure de prendre : ${reminder.medName} (${reminder.dosage})",
       tz.TZDateTime.from(scheduledDate, tz.local),
       const NotificationDetails(
         android: AndroidNotificationDetails(
@@ -106,7 +106,7 @@ class NotificationService {
     await _notificationsPlugin.zonedSchedule(
       id,
       'Rappel de Vaccination',
-      'Le vaccin de ${child.name} (${vaccine.vaccineName}) est prévu pour aujourd\\'hui.',
+      "Le vaccin de ${child.name} (${vaccine.vaccineName}) est prévu pour aujourd'hui.",
       tz.TZDateTime.from(scheduledDate, tz.local),
       const NotificationDetails(
         android: AndroidNotificationDetails(

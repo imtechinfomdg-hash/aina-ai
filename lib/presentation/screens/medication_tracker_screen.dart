@@ -192,7 +192,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen> {
                             context: context,
                             builder: (ctx) => AlertDialog(
                               title: const Text("Alerte d'Interaction !"),
-                              content: Text(warning, style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                              content: Text(warning!, style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
                               actions: [
                                 TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text("Annuler")),
                                 TextButton(onPressed: () => Navigator.pop(ctx, true), child: const Text("Enregistrer quand même", style: TextStyle(color: Colors.red))),
@@ -282,7 +282,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen> {
                         const SizedBox(height: 4),
                         Text("Dosage: ${reminder.dosage}"),
                         const SizedBox(height: 4),
-                        Text("Heure: ${DateFormat('HH:mm').format(reminder.time)}", style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue800)),
+                        Text("Heure: ${DateFormat('HH:mm').format(reminder.time)}", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue[800])),
                       ],
                     ),
                     trailing: Row(

@@ -149,7 +149,7 @@ class PdfExportService {
         pw.Text('Historique Vaccinal (PEV)', style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold, color: PdfColors.blue800)),
         pw.SizedBox(height: 10),
         pw.Table.fromTextArray(
-          headers: ['Vaccin', 'Date Prévue', 'Statut', 'Date d\\'Administration'],
+          headers: ['Vaccin', 'Date Prévue', 'Statut', "Date d'Administration"],
           data: vaccines.map((v) => [
             v.vaccineName,
             DateFormat('dd/MM/yyyy').format(v.datePlanned),

@@ -30,7 +30,7 @@ class DatabaseHelper {
     final koto = ChildModel(
       id: _mockIdCounter++,
       firstName: 'Koto',
-      birthDate: now.subtract(const Duration(days: 180)).toIso8601String(),
+      birthDate: now.subtract(const Duration(days: 180)),
       gender: 'Garçon',
       weight: 7.5,
       height: 68.0,
@@ -39,7 +39,7 @@ class DatabaseHelper {
     _mockConstantes.add(ConstanteModel(
       id: _mockIdCounter++,
       enfantId: koto.id!,
-      date: now.toIso8601String(),
+      date: now,
       poids: 7.5,
       taille: 68.0,
       temperature: 37.1,
@@ -50,7 +50,7 @@ class DatabaseHelper {
     final soa = ChildModel(
       id: _mockIdCounter++,
       firstName: 'Soa',
-      birthDate: now.subtract(const Duration(days: 540)).toIso8601String(),
+      birthDate: now.subtract(const Duration(days: 540)),
       gender: 'Fille',
       weight: 10.2,
       height: 82.0,
@@ -59,7 +59,7 @@ class DatabaseHelper {
     _mockConstantes.add(ConstanteModel(
       id: _mockIdCounter++,
       enfantId: soa.id!,
-      date: now.subtract(const Duration(days: 1)).toIso8601String(),
+      date: now.subtract(const Duration(days: 1)),
       poids: 10.2,
       taille: 82.0,
       temperature: 38.5,
@@ -70,7 +70,7 @@ class DatabaseHelper {
       enfantId: soa.id!,
       medName: 'Paracétamol',
       dosage: '10 ml',
-      time: '08:00',
+      time: DateTime(now.year, now.month, now.day, 8, 0),
       isActive: true,
     ));
 
@@ -78,17 +78,16 @@ class DatabaseHelper {
     final rina = ChildModel(
       id: _mockIdCounter++,
       firstName: 'Rina',
-      birthDate: now.subtract(const Duration(days: 730)).toIso8601String(),
+      birthDate: now.subtract(const Duration(days: 730)),
       gender: 'Garçon',
       weight: 9.0,
       height: 85.0,
-      temperature: 36.8,
     );
     _mockChildren.add(rina);
     _mockConstantes.add(ConstanteModel(
       id: _mockIdCounter++,
       enfantId: rina.id!,
-      date: now.subtract(const Duration(days: 30)).toIso8601String(),
+      date: now.subtract(const Duration(days: 30)),
       poids: 8.8,
       taille: 84.5,
       temperature: 36.8,
@@ -97,7 +96,7 @@ class DatabaseHelper {
     _mockConstantes.add(ConstanteModel(
       id: _mockIdCounter++,
       enfantId: rina.id!,
-      date: now.toIso8601String(),
+      date: now,
       poids: 9.0,
       taille: 85.0,
       temperature: 36.9,

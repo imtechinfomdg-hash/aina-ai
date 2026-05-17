@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as p;
 
 class SystemSettingsScreen extends StatefulWidget {
   const SystemSettingsScreen({Key? key}) : super(key: key);
@@ -120,7 +120,7 @@ class _SystemSettingsScreenState extends State<SystemSettingsScreen> {
 
         // 2. Suppression destructrice de la base de données SQLite
         final dbPath = await getDatabasesPath();
-        final path = join(dbPath, 'aina_local.db');
+        final path = p.join(dbPath, 'aina_local.db');
         await deleteDatabase(path);
 
         if (mounted) {
