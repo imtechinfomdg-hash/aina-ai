@@ -1,0 +1,66 @@
+name: Aina Android APK Build
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch: # Permet de lancer le build manuellement depuis l'interface GitHub
+
+jobs:
+  build:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Configuration de Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17' # Requis pour les builds Android récents
+          cache: 'gradle' # Met en cache les dépendances Gradle
+
+      - name: Configuration de Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true # Met en cache le SDK Flutter et ~/.pub-cache
+
+      - name: Cache du modèle GGUF
+        id: cache-model
+        uses: actions/cache@v3
+        with:
+          path: assets/models/
+          key: ${{ runner.os }}-model-llama-3.2-1b-q4_k_m
+
+      - name: Téléchargement du modèle (si non présent en cache)
+        if: steps.cache-model.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p assets/models
+          echo "Téléchargement du modèle depuis Hugging Face..."
+          wget -q --show-progress -L -O assets/models/llama-3.2-1b-instruct-q4_k_m.gguf "https://huggingface.co/hugging-quants/Llama-3.2-1B-Instruct-Q4_K_M-GGUF/resolve/main/llama-3.2-1b-instruct-q4_k_m.gguf"
+
+      - name: Génération du dossier Android
+        run: |
+          flutter create --org com.aina --project-name aina --platforms=android .
+          if [ -f "android/app/build.gradle" ]; then
+            sed -i.bak 's/flutter.minSdkVersion/24/g' android/app/build.gradle || true
+            sed -i.bak 's/flutter.targetSdkVersion/34/g' android/app/build.gradle || true
+            sed -i.bak 's/flutter.compileSdkVersion/34/g' android/app/build.gradle || true
+          fi
+
+      - name: Installation des dépendances Flutter
+        run: flutter pub get
+
+      - name: Build de l'APK Release
+        run: flutter build apk --release
+
+      - name: Upload de l'APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Aina-Release-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
