@@ -45,14 +45,15 @@ jobs:
 
       - name: Génération du dossier Android
         run: |
-          mkdir -p assets/audio assets/l10n
+          mkdir -p assets/audio assets/l10n assets/data assets/images assets/images/secours
+          touch assets/audio/.gitkeep assets/l10n/.gitkeep assets/data/.gitkeep assets/images/.gitkeep assets/images/secours/.gitkeep
           flutter create --org com.aina --project-name aina --platforms=android .
           
           # Configuration pour build.gradle (Groovy)
           if [ -f "android/app/build.gradle" ]; then
             sed -i.bak 's/flutter.minSdkVersion/24/g' android/app/build.gradle || true
-            sed -i.bak 's/flutter.targetSdkVersion/34/g' android/app/build.gradle || true
-            sed -i.bak 's/flutter.compileSdkVersion/34/g' android/app/build.gradle || true
+            sed -i.bak 's/flutter.targetSdkVersion/36/g' android/app/build.gradle || true
+            sed -i.bak 's/flutter.compileSdkVersion/36/g' android/app/build.gradle || true
             
             sed -i.bak 's/sourceCompatibility/coreLibraryDesugaringEnabled true\n        sourceCompatibility/g' android/app/build.gradle || true
             sed -i.bak 's/defaultConfig {/defaultConfig {\n        multiDexEnabled true/g' android/app/build.gradle || true
@@ -62,8 +63,8 @@ jobs:
           # Configuration pour build.gradle.kts (Kotlin DSL - Flutter 3.16+)
           if [ -f "android/app/build.gradle.kts" ]; then
             sed -i.bak 's/flutter.minSdkVersion/24/g' android/app/build.gradle.kts || true
-            sed -i.bak 's/flutter.targetSdkVersion/34/g' android/app/build.gradle.kts || true
-            sed -i.bak 's/flutter.compileSdkVersion/34/g' android/app/build.gradle.kts || true
+            sed -i.bak 's/flutter.targetSdkVersion/36/g' android/app/build.gradle.kts || true
+            sed -i.bak 's/flutter.compileSdkVersion/36/g' android/app/build.gradle.kts || true
             
             sed -i.bak 's/sourceCompatibility/isCoreLibraryDesugaringEnabled = true\n        sourceCompatibility/g' android/app/build.gradle.kts || true
             sed -i.bak 's/defaultConfig {/defaultConfig {\n        multiDexEnabled = true/g' android/app/build.gradle.kts || true
